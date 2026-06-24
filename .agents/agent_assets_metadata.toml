@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "4QhVI7-bnANCiPmROGytL"
+uri = "file://artifacts/mobile/assets/images/icon.png"
+type = "image"
+title = "dokra running club icon"
+
+[[generated]]
+id = "7qY8_cMSqA0YTncnxcUR7"
+uri = "file://artifacts/mobile/assets/images/hero.png"
+type = "image"
+title = "dokra running hero banner"

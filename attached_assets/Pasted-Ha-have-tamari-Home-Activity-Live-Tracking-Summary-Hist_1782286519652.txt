@@ -1,0 +1,205 @@
+Ha, have tamari Home + Activity + Live Tracking + Summary + History + Activity Detail screens ni reference image ready chhe, etle Replit AI ne aa next prompt aapo:
+
+PROMPT FOR NEXT PHASE
+
+Continue building the Flutter app DOKRA Running Club.
+
+Use the uploaded UI image as the design reference for these screens:
+
+Home Screen
+Activity Selection Screen
+Live Tracking Map Screen
+Activity Summary Screen
+History Screen
+Activity Detail Screen
+
+Maintain the same premium theme:
+
+Black background
+Red primary color
+Gold accent color
+Rounded cards
+Smooth animations
+Professional sports app UI inspired by Nike Run Club and Strava
+HOME SCREEN
+
+Display:
+
+Greeting
+
+Good Morning, User Name
+
+Today's Stats
+Steps
+Distance
+Calories
+Active Time
+Activity Shortcuts
+Walking
+Running
+Cycling
+Weekly Progress Chart
+Recent Activities
+
+Show last activities with:
+
+Activity type
+Distance
+Duration
+Date
+ACTIVITY SELECTION SCREEN
+
+Only support:
+
+Walking
+Running
+Cycling
+
+Each card should include:
+
+Icon
+Title
+Description
+Start Activity button
+
+Selecting an activity opens the Live Tracking page.
+
+LIVE TRACKING SCREEN
+
+Use:
+
+google_maps_flutter
+geolocator
+flutter_polyline_points
+
+Features:
+
+Real-Time Map
+
+Show:
+
+User current location
+Live route polyline
+Start point marker
+Current marker
+Live Statistics
+Duration
+Distance
+Pace
+Speed
+Calories
+Steps
+
+Buttons:
+
+Pause
+Resume
+Finish
+
+Tracking must continue accurately until Finish is pressed.
+
+ACTIVITY SUMMARY SCREEN
+
+After Finish show:
+
+Route Map Preview
+Statistics
+Distance
+Duration
+Average Pace
+Average Speed
+Calories Burned
+Steps
+Date
+Activity Type
+
+Save activity to Firestore.
+
+Button:
+
+SAVE ACTIVITY
+
+HISTORY SCREEN
+
+Fetch activities from Firestore.
+
+Display activities in descending order.
+
+Provide filters:
+
+All
+Running
+Walking
+Cycling
+
+Each activity card should show:
+
+Activity icon
+Distance
+Duration
+Date
+
+Clicking a card opens Activity Detail.
+
+ACTIVITY DETAIL SCREEN
+
+Display:
+
+Route Map
+Complete Statistics
+Distance
+Duration
+Average Pace
+Average Speed
+Max Speed
+Calories
+Steps
+Elevation Gain
+
+Buttons:
+
+Share Activity
+Delete Activity
+
+Delete should remove data from Firestore after confirmation.
+
+FIRESTORE COLLECTION
+
+activities
+
+Fields:
+
+{
+  "userId": "",
+  "activityType": "",
+  "distance": 0,
+  "duration": 0,
+  "averageSpeed": 0,
+  "pace": "",
+  "calories": 0,
+  "steps": 0,
+  "routePoints": [],
+  "createdAt": ""
+}
+Packages
+
+Use:
+
+google_maps_flutter
+geolocator
+flutter_polyline_points
+cloud_firestore
+provider
+fl_chart
+shared_preferences
+Requirements
+Null Safety
+Clean Architecture
+Provider State Management
+Responsive UI
+Reusable Widgets
+Production Level Code
+Accurate GPS Tracking
+Smooth Page Transitions
+
+The experience should feel like a premium combination of Nike Run Club and Strava under the DOKRA Running Club brand.

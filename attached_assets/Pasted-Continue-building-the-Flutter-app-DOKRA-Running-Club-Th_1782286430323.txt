@@ -1,0 +1,220 @@
+Continue building the Flutter app DOKRA Running Club.
+
+The onboarding screens are already completed:
+
+Select State
+Select City
+Join Local DOKRA Club
+Complete Profile
+
+After completing the profile, automatically navigate the user to the main app.
+
+Use Firebase Firestore to save:
+
+Full Name
+Email
+Mobile Number
+Gender
+Date of Birth
+State
+City
+Club Name
+Profile Photo URL
+Create Main App with Bottom Navigation
+
+Create 5 tabs:
+
+Home
+Activities
+Community
+Leaderboard
+Profile
+
+Maintain selected tab state.
+
+HOME SCREEN
+
+Use premium dark UI.
+
+Show:
+
+Good Morning, User Name
+
+Today's Statistics:
+
+Steps
+Distance
+Calories
+Active Time
+
+Show 3 activity cards:
+
+Walking
+Running
+Cycling
+
+Show:
+
+Weekly progress chart
+Recent activities
+Total kilometers completed
+ACTIVITIES SCREEN
+
+Display only:
+
+Walking
+Running
+Cycling
+
+Each card should show:
+
+Icon
+Description
+Start Button
+LIVE TRACKING SCREEN
+
+When Start is pressed:
+
+Open a tracking page with Google Maps.
+
+Use:
+
+google_maps_flutter
+geolocator
+flutter_polyline_points
+
+Features:
+
+Current location marker
+Real-time route drawing
+Timer
+Distance calculation
+Speed calculation
+Pace calculation
+Pause button
+Resume button
+Finish button
+
+Use accurate GPS tracking.
+
+ACTIVITY SUMMARY SCREEN
+
+After Finish:
+
+Display:
+
+Route Map
+Distance
+Duration
+Average Speed
+Calories
+Date
+Activity Type
+
+Save all activities to Firestore.
+
+HISTORY SCREEN
+
+Show all previous activities in descending order.
+
+Each item:
+
+Activity type
+Distance
+Duration
+Date
+
+Clicking an item opens full details.
+
+COMMUNITY SCREEN
+
+Users should only see posts from their own city club.
+
+Example:
+
+User club:
+
+DOKRA Ahmedabad Running Club
+
+Only show Ahmedabad community posts.
+
+Features:
+
+Create post
+Upload image
+Like post
+Comment
+View member count
+
+Save everything in Firestore.
+
+LEADERBOARD SCREEN
+
+Create 3 tabs:
+
+City Ranking
+State Ranking
+India Ranking
+
+Rank users based on:
+
+Total Distance Completed.
+
+Show:
+
+Rank
+Profile Photo
+Name
+Distance
+PROFILE SCREEN
+
+Show:
+
+Profile Photo
+Full Name
+State
+City
+Club Name
+Total Activities
+Total Distance
+Total Steps
+Achievements
+
+Buttons:
+
+Edit Profile
+Settings
+Logout
+LOGOUT
+
+Clear session and return to Login Screen.
+
+FIREBASE COLLECTIONS
+
+users
+
+activities
+
+posts
+
+comments
+
+likes
+
+leaderboards
+
+clubs
+
+Architecture
+
+Use:
+
+Provider State Management
+Clean Architecture
+Null Safety
+Reusable Widgets
+Proper Loading Indicators
+Error Handling
+Production Ready Code
+
+The UI should feel like a premium mix of Nike Run Club and Strava with black, red and gold colors matching DOKRA branding.
