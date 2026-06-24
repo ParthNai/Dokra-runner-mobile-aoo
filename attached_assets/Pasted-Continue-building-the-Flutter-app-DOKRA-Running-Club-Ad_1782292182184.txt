@@ -1,0 +1,234 @@
+Continue building the Flutter app DOKRA Running Club.
+
+Add complete smartwatch and fitness wearable support.
+
+The goal is:
+
+Users should be able to perform activities without carrying their phone.
+
+The app must automatically synchronize all activity data from supported smartwatches and health platforms.
+
+SUPPORTED DEVICES
+
+Support:
+
+Apple Watch
+Samsung Galaxy Watch
+Wear OS Watches
+Garmin Watches
+Fitbit Devices
+Amazfit Watches
+Noise Smartwatches (through Google Health Connect if available)
+Fire-Boltt Watches (through Health Connect if available)
+HEALTH PLATFORMS
+
+Integrate:
+
+Google Health Connect (Android)
+Google Fit
+Samsung Health
+Apple HealthKit (iOS)
+Garmin Connect
+Fitbit API
+DATA TO SYNC
+
+Automatically sync:
+
+Steps
+Distance
+Calories
+Heart Rate
+Average Heart Rate
+Max Heart Rate
+Active Minutes
+Speed
+Pace
+Elevation Gain
+Cycling Distance
+Running Distance
+Walking Distance
+Duration
+Sleep Data (Future Ready)
+VO2 Max (Future Ready)
+Stress Score (Future Ready)
+AUTO SYNC
+
+When the user opens DOKRA:
+
+Check connected devices.
+Request permissions.
+Fetch latest health data.
+Merge with Firebase activity records.
+Update Home Screen automatically.
+SMARTWATCH SETTINGS SCREEN
+
+Create:
+
+Connected Devices
+
+Display:
+
+Apple Watch
+Samsung Watch
+Garmin
+Fitbit
+Wear OS
+
+Status:
+
+✅ Connected
+
+❌ Not Connected
+
+Buttons:
+
+Connect Device
+Disconnect Device
+Sync Now
+Last Sync Time
+ACTIVITY DETECTION
+
+If user starts activity from watch:
+
+Automatically detect:
+
+Running
+Walking
+Cycling
+
+Generate activity inside DOKRA without requiring phone.
+
+REAL-TIME DATA
+
+While activity is active:
+
+Display:
+
+Heart Rate
+Distance
+Speed
+Steps
+Calories
+
+Update live.
+
+BACKGROUND SYNC
+
+Even if app is closed:
+
+Sync should continue.
+Restore data when app reopens.
+DUPLICATE PREVENTION
+
+Avoid duplicate records.
+
+If same activity already exists:
+
+Do not create another activity.
+
+FIRESTORE COLLECTION
+
+Create:
+
+connected_devices
+health_data
+heart_rate_records
+sync_history
+DEVICE MODEL STORAGE
+
+Save:
+
+{
+  "deviceName": "",
+  "deviceType": "",
+  "manufacturer": "",
+  "connected": true,
+  "lastSync": "",
+  "batteryLevel": ""
+}
+HOME SCREEN ADDITIONS
+
+Show:
+
+Connected Device Name
+
+Example:
+
+Garmin Forerunner 265
+
+Battery: 82%
+
+Last Sync: 2 minutes ago
+
+ACTIVITY SUMMARY ADDITIONS
+
+Include:
+
+Average Heart Rate
+Maximum Heart Rate
+Device Used
+
+Example:
+
+Recorded using:
+
+Samsung Galaxy Watch 8
+
+SHARE CARD ADDITIONS
+
+Display:
+
+Recorded With:
+
+Garmin Forerunner 265
+
+Average Heart Rate:
+
+152 BPM
+
+Maximum Heart Rate:
+
+178 BPM
+
+PACKAGES TO USE
+health
+health_fit
+permission_handler
+device_info_plus
+provider
+flutter_blue_plus
+shared_preferences
+ARCHITECTURE REQUIREMENTS
+
+Use:
+
+Provider or Riverpod
+Clean Architecture
+Null Safety
+Background Services
+Production Level Code
+Error Handling
+Loading States
+FUTURE READY FEATURES
+
+Keep architecture ready for:
+
+AI Coach
+Recovery Score
+Training Load
+Race Prediction
+Personal Records
+Cadence Analysis
+Running Form Analysis
+Sleep Recovery
+Weekly Fitness Report
+IMPORTANT
+
+The smartwatch integration should feel similar to:
+
+Nike Run Club
+Strava
+Garmin Connect
+Samsung Health
+
+with premium accuracy and seamless synchronization under the DOKRA Running Club ecosystem.
