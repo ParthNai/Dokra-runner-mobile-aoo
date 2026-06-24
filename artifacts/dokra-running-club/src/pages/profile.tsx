@@ -21,7 +21,7 @@ export default function ProfileScreen() {
   const menuItems = [
     { icon: User, label: "Edit Profile", href: "/edit-profile" },
     { icon: Trophy, label: "Achievements", href: "/achievements" },
-    { icon: Activity, label: "My Activities", href: "/activities" },
+    { icon: Activity, label: "My Activities", href: "/activity-share" },
     { icon: Settings, label: "Settings", href: "/settings" },
     { icon: HeadphonesIcon, label: "Help & Support", href: "/support" },
   ];

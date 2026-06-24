@@ -9,6 +9,7 @@ import ProfileScreen from "@/pages/profile";
 import EditProfileScreen from "@/pages/edit-profile";
 import ChangePhotoScreen from "@/pages/change-photo";
 import ProfileUpdatedScreen from "@/pages/profile-updated";
+import ActivityShareScreen from "@/pages/activity-share";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/edit-profile" component={EditProfileScreen} />
       <Route path="/change-photo" component={ChangePhotoScreen} />
       <Route path="/profile-updated" component={ProfileUpdatedScreen} />
+      <Route path="/activity-share" component={ActivityShareScreen} />
       <Route component={NotFound} />
     </Switch>
   );
