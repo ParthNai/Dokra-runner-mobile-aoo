@@ -1,0 +1,193 @@
+BUILD A PREMIUM ACTIVITY SHARE CARD GENERATOR FOR DOKRA RUNNING CLUB
+
+Create a feature called "Activity Share Card".
+
+After a user completes any activity (Walking, Running, Cycling), automatically generate a beautiful shareable poster/image that users can save to their phone and share on social media.
+
+This feature should be accessible from:
+
+* Activity Summary Screen
+* Activity Detail Screen
+
+Add button:
+
+"Generate Share Card"
+
+---
+
+CARD TYPES
+
+Provide 3 Templates:
+
+1. Classic DOKRA Card
+2. Social Media Story Card (9:16)
+3. Instagram Post Card (1:1)
+
+---
+
+CARD CONTENT
+
+Automatically display:
+
+* DOKRA Running Club Logo
+* User Name
+* User Profile Photo
+* Activity Type
+* Date
+* Time
+* City
+* State
+
+---
+
+ACTIVITY STATS
+
+Display:
+
+* Distance (KM)
+* Duration
+* Average Pace
+* Average Speed
+* Calories
+* Steps
+* Elevation Gain
+* Activity Date
+
+---
+
+GPS ROUTE VISUALIZATION
+
+Generate a visual route path using recorded GPS points.
+
+Show:
+
+* Start Marker
+* Finish Marker
+* KM Markers
+* Route Line
+
+Use route data from saved activity.
+
+---
+
+BACKGROUND OPTIONS
+
+User can choose:
+
+1. Activity Photo
+2. Route Map Background
+3. Gradient Background
+4. Club Theme Background
+
+---
+
+BRANDING
+
+Always include:
+
+DOKRA Running Club Logo
+
+Tagline:
+
+"Run. Achieve. Inspire."
+
+Footer:
+
+#DOKRARunningClub
+
+---
+
+SOCIAL SHARE OPTIONS
+
+Allow:
+
+* Save to Gallery
+* Share to Instagram Story
+* Share to WhatsApp
+* Share to Facebook
+* Share to X (Twitter)
+* Native Device Share
+
+---
+
+ANIMATED PREVIEW
+
+Before saving:
+
+Show live preview of generated card.
+
+User can:
+
+* Zoom
+* Change template
+* Change background
+* Hide/Show stats
+
+---
+
+TECHNICAL IMPLEMENTATION
+
+Use:
+
+* screenshot
+* widgets_to_image
+* share_plus
+* path_provider
+* image_gallery_saver
+
+Generate high-resolution image.
+
+Minimum export:
+
+1080x1920
+
+---
+
+FIREBASE STORAGE
+
+Optionally allow:
+
+"Save to Activity Album"
+
+Store generated card URL in Firestore.
+
+Collection:
+
+activity_share_cards
+
+Fields:
+
+cardId
+userId
+activityId
+imageUrl
+createdAt
+
+---
+
+UI FLOW
+
+Activity Complete
+↓
+Activity Summary
+↓
+Generate Share Card
+↓
+Choose Template
+↓
+Preview Card
+↓
+Save or Share
+
+---
+
+REQUIREMENTS
+
+* Production Ready
+* Responsive Design
+* Smooth Animations
+* High Resolution Export
+* Fast Rendering
+* Premium Sports App Experience
+
+The final result should feel better than Nike Run Club and Strava sharing cards while maintaining DOKRA Running Club branding.
