@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import React from "react";
 import {
@@ -12,18 +13,16 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ActivityCard } from "@/components/ActivityCard";
 import { useAuth } from "@/context/AuthContext";
 import { useActivity } from "@/context/ActivityContext";
 import { useColors } from "@/hooks/useColors";
 
-const ACHIEVEMENTS = [
-  { id: "1", icon: "walk", label: "First Run", unlocked: true },
-  { id: "2", icon: "medal", label: "5K Club", unlocked: false },
-  { id: "3", icon: "trophy", label: "10K Hero", unlocked: false },
-  { id: "4", icon: "flame", label: "7 Day Streak", unlocked: false },
-  { id: "5", icon: "ribbon", label: "Community Star", unlocked: false },
-  { id: "6", icon: "star", label: "Speed Demon", unlocked: false },
+const MENU_ITEMS = [
+  { id: "edit", icon: "person-outline", label: "Edit Profile", route: "/edit-profile" },
+  { id: "achievements", icon: "trophy-outline", label: "Achievements", route: null },
+  { id: "activities", icon: "walk-outline", label: "My Activities", route: "/(tabs)/activities" },
+  { id: "settings", icon: "settings-outline", label: "Settings", route: null },
+  { id: "support", icon: "help-circle-outline", label: "Help & Support", route: null },
 ];
 
 export default function ProfileScreen() {
@@ -34,31 +33,40 @@ export default function ProfileScreen() {
 
   const topPad = Platform.OS === "web" ? 67 : insets.top;
 
-  const activities = getActivitiesByUser(user?.id ?? "");
+  const activities = user ? getActivitiesByUser(user.id) : [];
   const totalDist = activities.reduce((s, a) => s + a.distance, 0);
-  const totalCal = activities.reduce((s, a) => s + a.calories, 0);
-  const recentActivities = activities.slice(0, 3);
-
-  const achievements = ACHIEVEMENTS.map((a) => ({
-    ...a,
-    unlocked: a.id === "1" ? activities.length > 0 : false,
-  }));
 
   const handleLogout = () => {
-    Alert.alert("Logout", "Are you sure you want to logout?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Logout",
-        style: "destructive",
-        onPress: async () => {
-          await logout();
-          router.replace("/(auth)/splash");
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout from DOKRA Running Club?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Logout",
+          style: "destructive",
+          onPress: async () => {
+            await logout();
+            router.replace("/(auth)/splash");
+          },
         },
-      },
-    ]);
+      ]
+    );
+  };
+
+  const handleMenuPress = (item: (typeof MENU_ITEMS)[0]) => {
+    if (item.route) {
+      router.push(item.route as any);
+    } else {
+      Alert.alert("Coming Soon", `${item.label} will be available soon.`);
+    }
   };
 
   if (!user) return null;
+
+  const displayDist = (user.totalDistance > 0 ? user.totalDistance : totalDist).toFixed(1);
+  const displayActivities = user.totalActivities > 0 ? user.totalActivities : activities.length;
+  const displaySteps = user.totalSteps ?? 0;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -66,54 +74,68 @@ export default function ProfileScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[
           styles.scroll,
-          { paddingTop: topPad + 16, paddingBottom: Platform.OS === "web" ? 120 : 100 },
+          { paddingTop: topPad + 12, paddingBottom: Platform.OS === "web" ? 120 : 100 },
         ]}
       >
         <View style={styles.headerRow}>
-          <Text style={[styles.title, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-            PROFILE
-          </Text>
-          <Pressable onPress={handleLogout}>
-            <Ionicons name="log-out-outline" size={24} color={colors.primary} />
+          <Pressable style={styles.headerIcon}>
+            <Ionicons name="notifications-outline" size={22} color={colors.foreground} />
+          </Pressable>
+          <View style={styles.logoBlock}>
+            <Text style={[styles.logoMain, { color: colors.accent, fontFamily: "Inter_700Bold" }]}>
+              DOKRA
+            </Text>
+            <Text style={[styles.logoSub, { color: colors.mutedForeground, fontFamily: "Inter_500Medium" }]}>
+              RUNNING CLUB
+            </Text>
+          </View>
+          <Pressable style={styles.headerIcon} onPress={() => Alert.alert("Coming Soon", "Settings coming soon.")}>
+            <Ionicons name="settings-outline" size={22} color={colors.foreground} />
           </Pressable>
         </View>
 
-        <View style={[styles.profileCard, { backgroundColor: colors.card, borderRadius: colors.radius, borderColor: colors.border }]}>
-          <View style={styles.avatarRow}>
-            {user.profilePhoto ? (
-              <Image source={{ uri: user.profilePhoto }} style={styles.avatar} />
-            ) : (
-              <View style={[styles.avatarPlaceholder, { backgroundColor: colors.primary }]}>
-                <Text style={[styles.avatarInitial, { fontFamily: "Inter_700Bold" }]}>
-                  {user.fullName.charAt(0).toUpperCase()}
-                </Text>
-              </View>
-            )}
-            <View style={styles.userInfo}>
-              <Text style={[styles.userName, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-                {user.fullName}
-              </Text>
-              <Text style={[styles.userClub, { color: colors.accent, fontFamily: "Inter_500Medium" }]}>
-                {user.clubName || "DOKRA Running Club"}
-              </Text>
-              <View style={styles.locationRow}>
-                <Ionicons name="location-outline" size={14} color={colors.mutedForeground} />
-                <Text style={[styles.location, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-                  {[user.city, user.state].filter(Boolean).join(", ") || "India"}
-                </Text>
-              </View>
-            </View>
+        <View style={styles.profileCenter}>
+          <View style={styles.avatarWrapper}>
+            <LinearGradient
+              colors={[colors.accent, colors.primary]}
+              style={styles.avatarRing}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+            >
+              {user.profilePhoto ? (
+                <Image source={{ uri: user.profilePhoto }} style={styles.avatar} />
+              ) : (
+                <View style={[styles.avatarFallback, { backgroundColor: colors.card }]}>
+                  <Text style={[styles.avatarInitial, { color: colors.accent, fontFamily: "Inter_700Bold" }]}>
+                    {user.fullName.charAt(0).toUpperCase()}
+                  </Text>
+                </View>
+              )}
+            </LinearGradient>
           </View>
 
-          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+          <Text style={[styles.userName, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
+            {user.fullName}
+          </Text>
+          <View style={styles.locationRow}>
+            <Ionicons name="location-outline" size={13} color={colors.mutedForeground} />
+            <Text style={[styles.locationText, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
+              {[user.city, user.state].filter(Boolean).join(", ") || "India"}
+            </Text>
+          </View>
+          <Text style={[styles.clubName, { color: colors.accent, fontFamily: "Inter_600SemiBold" }]}>
+            {user.clubName || "DOKRA Running Club"}
+          </Text>
+        </View>
 
-          <View style={styles.statsRow}>
-            {[
-              { label: "Total Distance", value: `${totalDist.toFixed(1)} km` },
-              { label: "Activities", value: activities.length.toString() },
-              { label: "Calories", value: `${totalCal}` },
-            ].map((s) => (
-              <View key={s.label} style={styles.statItem}>
+        <View style={[styles.statsCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          {[
+            { value: displayDist, label: "Total KM" },
+            { value: displayActivities.toString(), label: "Total Activities" },
+            { value: Number(displaySteps).toLocaleString(), label: "Total Steps" },
+          ].map((s, i, arr) => (
+            <React.Fragment key={s.label}>
+              <View style={styles.statItem}>
                 <Text style={[styles.statValue, { color: colors.accent, fontFamily: "Inter_700Bold" }]}>
                   {s.value}
                 </Text>
@@ -121,78 +143,55 @@ export default function ProfileScreen() {
                   {s.label}
                 </Text>
               </View>
-            ))}
-          </View>
+              {i < arr.length - 1 && (
+                <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
+              )}
+            </React.Fragment>
+          ))}
         </View>
 
-        <View style={styles.infoSection}>
-          {[
-            { icon: "mail-outline", label: "Email", value: user.email },
-            { icon: "phone-portrait-outline", label: "Mobile", value: user.mobile || "Not set" },
-            { icon: "person-outline", label: "Gender", value: user.gender || "Not set" },
-            { icon: "calendar-outline", label: "Date of Birth", value: user.dateOfBirth || "Not set" },
-          ].map((row) => (
-            <View key={row.label} style={[styles.infoRow, { borderColor: colors.border }]}>
-              <Ionicons name={row.icon as any} size={18} color={colors.mutedForeground} />
-              <View style={styles.infoText}>
-                <Text style={[styles.infoLabel, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
-                  {row.label}
-                </Text>
-                <Text style={[styles.infoValue, { color: colors.foreground, fontFamily: "Inter_500Medium" }]}>
-                  {row.value}
+        <View style={[styles.menuCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          {MENU_ITEMS.map((item, idx) => (
+            <Pressable
+              key={item.id}
+              style={({ pressed }) => [
+                styles.menuItem,
+                { borderColor: colors.border },
+                idx < MENU_ITEMS.length - 1 && styles.menuItemBorder,
+                pressed && { backgroundColor: colors.border + "40" },
+              ]}
+              onPress={() => handleMenuPress(item)}
+            >
+              <View style={styles.menuLeft}>
+                <View style={[styles.menuIconWrap, { backgroundColor: colors.secondary }]}>
+                  <Ionicons name={item.icon as any} size={18} color={colors.primary} />
+                </View>
+                <Text style={[styles.menuLabel, { color: colors.foreground, fontFamily: "Inter_500Medium" }]}>
+                  {item.label}
                 </Text>
               </View>
-            </View>
+              <Ionicons name="chevron-forward" size={18} color={colors.mutedForeground} />
+            </Pressable>
           ))}
-        </View>
 
-        <Text style={[styles.sectionTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-          ACHIEVEMENTS
-        </Text>
-        <View style={styles.achievementsGrid}>
-          {achievements.map((a) => (
-            <View
-              key={a.id}
-              style={[
-                styles.badge,
-                {
-                  backgroundColor: a.unlocked ? colors.accent + "22" : colors.card,
-                  borderColor: a.unlocked ? colors.accent : colors.border,
-                  borderRadius: colors.radius,
-                  opacity: a.unlocked ? 1 : 0.5,
-                },
-              ]}
-            >
-              <Ionicons
-                name={a.icon as any}
-                size={26}
-                color={a.unlocked ? colors.accent : colors.mutedForeground}
-              />
-              <Text
-                style={[
-                  styles.badgeLabel,
-                  {
-                    color: a.unlocked ? colors.foreground : colors.mutedForeground,
-                    fontFamily: "Inter_500Medium",
-                  },
-                ]}
-              >
-                {a.label}
+          <Pressable
+            style={({ pressed }) => [
+              styles.menuItem,
+              pressed && { backgroundColor: colors.border + "40" },
+            ]}
+            onPress={handleLogout}
+          >
+            <View style={styles.menuLeft}>
+              <View style={[styles.menuIconWrap, { backgroundColor: "#E31E2422" }]}>
+                <Ionicons name="log-out-outline" size={18} color={colors.primary} />
+              </View>
+              <Text style={[styles.menuLabel, { color: colors.primary, fontFamily: "Inter_500Medium" }]}>
+                Logout
               </Text>
             </View>
-          ))}
+            <Ionicons name="chevron-forward" size={18} color={colors.mutedForeground} />
+          </Pressable>
         </View>
-
-        {recentActivities.length > 0 && (
-          <>
-            <Text style={[styles.sectionTitle, { color: colors.foreground, fontFamily: "Inter_700Bold" }]}>
-              RECENT ACTIVITIES
-            </Text>
-            {recentActivities.map((a) => (
-              <ActivityCard key={a.id} activity={a} />
-            ))}
-          </>
-        )}
       </ScrollView>
     </View>
   );
@@ -200,31 +199,71 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  scroll: { paddingHorizontal: 16, gap: 16 },
-  headerRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
-  title: { fontSize: 22, letterSpacing: 2 },
-  profileCard: { padding: 16, gap: 14, borderWidth: 1 },
-  avatarRow: { flexDirection: "row", alignItems: "center", gap: 14 },
-  avatar: { width: 70, height: 70, borderRadius: 35 },
-  avatarPlaceholder: { width: 70, height: 70, borderRadius: 35, alignItems: "center", justifyContent: "center" },
-  avatarInitial: { color: "#fff", fontSize: 30 },
-  userInfo: { flex: 1, gap: 4 },
-  userName: { fontSize: 20 },
-  userClub: { fontSize: 13 },
-  locationRow: { flexDirection: "row", alignItems: "center", gap: 4, marginTop: 2 },
-  location: { fontSize: 12 },
-  divider: { height: 1 },
-  statsRow: { flexDirection: "row" },
-  statItem: { flex: 1, alignItems: "center", gap: 2 },
-  statValue: { fontSize: 18 },
+  scroll: { paddingHorizontal: 16, gap: 20 },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  headerIcon: { padding: 4 },
+  logoBlock: { alignItems: "center" },
+  logoMain: { fontSize: 18, letterSpacing: 3 },
+  logoSub: { fontSize: 9, letterSpacing: 2.5, marginTop: -2 },
+  profileCenter: { alignItems: "center", gap: 6 },
+  avatarWrapper: { marginBottom: 4 },
+  avatarRing: {
+    width: 94,
+    height: 94,
+    borderRadius: 47,
+    padding: 3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatar: { width: 86, height: 86, borderRadius: 43 },
+  avatarFallback: {
+    width: 86,
+    height: 86,
+    borderRadius: 43,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatarInitial: { fontSize: 36 },
+  userName: { fontSize: 22, marginTop: 2 },
+  locationRow: { flexDirection: "row", alignItems: "center", gap: 3 },
+  locationText: { fontSize: 13 },
+  clubName: { fontSize: 13, letterSpacing: 0.5 },
+  statsCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 14,
+    borderWidth: 1,
+    paddingVertical: 18,
+    paddingHorizontal: 8,
+  },
+  statItem: { flex: 1, alignItems: "center", gap: 3 },
+  statValue: { fontSize: 20 },
   statLabel: { fontSize: 11, textAlign: "center" },
-  infoSection: { gap: 0 },
-  infoRow: { flexDirection: "row", alignItems: "center", gap: 12, paddingVertical: 12, borderBottomWidth: 1 },
-  infoText: { gap: 1 },
-  infoLabel: { fontSize: 11 },
-  infoValue: { fontSize: 14 },
-  sectionTitle: { fontSize: 14, letterSpacing: 1.5 },
-  achievementsGrid: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
-  badge: { width: "30%", alignItems: "center", padding: 12, gap: 6, borderWidth: 1, minWidth: 90 },
-  badgeLabel: { fontSize: 11, textAlign: "center" },
+  statDivider: { width: 1, height: 36 },
+  menuCard: {
+    borderRadius: 14,
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  menuItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+    paddingHorizontal: 16,
+  },
+  menuItemBorder: { borderBottomWidth: 1 },
+  menuLeft: { flexDirection: "row", alignItems: "center", gap: 14 },
+  menuIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  menuLabel: { fontSize: 15 },
 });

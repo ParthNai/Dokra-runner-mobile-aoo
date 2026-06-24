@@ -20,6 +20,7 @@ export interface User {
   profilePhoto: string | null;
   totalDistance: number;
   totalActivities: number;
+  totalSteps: number;
   joinedAt: string;
   isGoogle?: boolean;
 }
@@ -100,6 +101,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
         totalDistance: 0,
         totalActivities: 0,
+        totalSteps: 0,
         joinedAt: new Date().toISOString(),
       };
       const passwords = await getPasswords();
@@ -133,6 +135,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           profilePhoto: null,
           totalDistance: 0,
           totalActivities: 0,
+          totalSteps: 0,
           joinedAt: new Date().toISOString(),
           isGoogle: true,
         };
