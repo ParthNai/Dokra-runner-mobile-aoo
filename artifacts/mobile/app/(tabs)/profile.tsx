@@ -19,10 +19,10 @@ import { useColors } from "@/hooks/useColors";
 
 const MENU_ITEMS = [
   { id: "edit", icon: "person-outline", label: "Edit Profile", route: "/edit-profile" },
-  { id: "achievements", icon: "trophy-outline", label: "Achievements", route: null },
-  { id: "activities", icon: "walk-outline", label: "My Activities", route: "/(tabs)/activities" },
-  { id: "settings", icon: "settings-outline", label: "Settings", route: null },
-  { id: "support", icon: "help-circle-outline", label: "Help & Support", route: null },
+  { id: "achievements", icon: "trophy-outline", label: "Achievements", route: "/achievements" },
+  { id: "activities", icon: "walk-outline", label: "My Activities", route: "/history" },
+  { id: "settings", icon: "settings-outline", label: "Settings", route: "/settings" },
+  { id: "support", icon: "help-circle-outline", label: "Help & Support", route: "/help-support" },
 ];
 
 export default function ProfileScreen() {
@@ -89,7 +89,7 @@ export default function ProfileScreen() {
               RUNNING CLUB
             </Text>
           </View>
-          <Pressable style={styles.headerIcon} onPress={() => Alert.alert("Coming Soon", "Settings coming soon.")}>
+          <Pressable style={styles.headerIcon} onPress={() => router.push("/settings" as any)}>
             <Ionicons name="settings-outline" size={22} color={colors.foreground} />
           </Pressable>
         </View>

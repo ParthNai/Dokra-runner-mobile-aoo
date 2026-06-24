@@ -8,6 +8,7 @@ import {
   Platform,
   Pressable,
   ScrollView,
+  Share,
   StyleSheet,
   Text,
   TextInput,
@@ -53,21 +54,6 @@ export default function PostDetailScreen() {
   }
 
   const liked = post.likes.includes(userId);
-
-  const handleComment = async () => {
-    if (!commentText.trim() || !user) return;
-    setSubmitting(true);
-    await addComment(post.id, { userId: user.id, userName: user.fullName });
-    // Actually submit the text
-    await addComment(post.id, {
-      userId: user.id,
-      userName: user.fullName,
-      text: commentText.trim(),
-      userAvatar: user.profilePhoto ?? undefined,
-    });
-    setCommentText("");
-    setSubmitting(false);
-  };
 
   const handleAddComment = async () => {
     if (!commentText.trim() || !user || submitting) return;
@@ -156,7 +142,10 @@ export default function PostDetailScreen() {
                 {post.comments.length}
               </Text>
             </Pressable>
-            <Pressable style={styles.actionBtn}>
+            <Pressable
+              style={styles.actionBtn}
+              onPress={() => Share.share({ message: `${post.userName}: ${post.content}\n\nShared from DOKRA Running Club 🏃` })}
+            >
               <Ionicons name="share-social-outline" size={20} color={colors.mutedForeground} />
               <Text style={[styles.actionText, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
                 Share

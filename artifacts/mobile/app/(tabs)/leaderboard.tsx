@@ -268,13 +268,14 @@ function OverviewScreen({ colors, cityRank, stateRank, indiaRank, onSelectBoard 
 
 // ─── Board Screen ─────────────────────────────────────────────────────────────
 
-function BoardScreen({ scope, colors, user, userKm, onBack }: {
+function BoardScreen({ scope: initialScope, colors, user, userKm, onBack }: {
   scope: BoardScope;
   colors: any;
   user: any;
   userKm: number;
   onBack: () => void;
 }) {
+  const [scope, setScope] = useState<BoardScope>(initialScope);
   const [timeFilter, setTimeFilter] = useState<TimeFilter>("This Month");
   const [showFilter, setShowFilter] = useState(false);
 
@@ -322,6 +323,7 @@ function BoardScreen({ scope, colors, user, userKm, onBack }: {
         {SCOPES.map((s) => (
           <Pressable
             key={s}
+            onPress={() => setScope(s)}
             style={[
               brdStyles.scopeTab,
               {

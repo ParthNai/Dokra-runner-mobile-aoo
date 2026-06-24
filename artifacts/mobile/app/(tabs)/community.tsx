@@ -7,6 +7,7 @@ import {
   Platform,
   Pressable,
   ScrollView,
+  Share,
   StyleSheet,
   Text,
   View,
@@ -101,13 +102,19 @@ function PostCard({ post, colors, userId }: { post: Post; colors: any; userId: s
             {post.likes.length}
           </Text>
         </Pressable>
-        <Pressable style={styles.actionBtn}>
+        <Pressable
+          style={styles.actionBtn}
+          onPress={() => router.push({ pathname: "/post-detail", params: { id: post.id } })}
+        >
           <Ionicons name="chatbubble-outline" size={19} color={colors.mutedForeground} />
           <Text style={[styles.actionCount, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
             {post.comments.length}
           </Text>
         </Pressable>
-        <Pressable style={styles.actionBtn}>
+        <Pressable
+          style={styles.actionBtn}
+          onPress={() => Share.share({ message: `${post.userName}: ${post.content}\n\nShared from DOKRA Running Club 🏃` })}
+        >
           <Ionicons name="share-social-outline" size={20} color={colors.mutedForeground} />
           <Text style={[styles.actionCount, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>
             Share
@@ -352,11 +359,36 @@ export default function CommunityScreen() {
         {/* ALBUMS TAB */}
         {activeTab === "Albums" && (
           <View style={styles.albumsWrap}>
-            <View style={styles.empty}>
-              <Ionicons name="images-outline" size={56} color={colors.border} />
-              <Text style={[styles.emptyTitle, { color: colors.foreground, fontFamily: "Inter_600SemiBold" }]}>No albums yet</Text>
-              <Text style={[styles.emptyText, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>Club photo albums will appear here</Text>
-            </View>
+            {(() => {
+              const allImages = clubPosts.filter((p) => p.images.length > 0);
+              if (allImages.length === 0) {
+                return (
+                  <View style={styles.empty}>
+                    <Ionicons name="images-outline" size={56} color={colors.border} />
+                    <Text style={[styles.emptyTitle, { color: colors.foreground, fontFamily: "Inter_600SemiBold" }]}>No photos yet</Text>
+                    <Text style={[styles.emptyText, { color: colors.mutedForeground, fontFamily: "Inter_400Regular" }]}>Photos shared by club members will appear here</Text>
+                  </View>
+                );
+              }
+              return (
+                <View style={styles.albumGrid}>
+                  {allImages.map((p) => (
+                    <Pressable
+                      key={p.id}
+                      onPress={() => router.push({ pathname: "/post-detail", params: { id: p.id } })}
+                      style={styles.albumCell}
+                    >
+                      <Image source={{ uri: p.images[0] }} style={styles.albumImg} resizeMode="cover" />
+                      <View style={styles.albumOverlay}>
+                        <Text style={[styles.albumName, { fontFamily: "Inter_500Medium" }]} numberOfLines={1}>
+                          {p.userName}
+                        </Text>
+                      </View>
+                    </Pressable>
+                  ))}
+                </View>
+              );
+            })()}
           </View>
         )}
       </ScrollView>
@@ -463,7 +495,15 @@ const styles = StyleSheet.create({
   eventBtnInterested: { flex: 1, paddingVertical: 10, alignItems: "center", borderWidth: 1 },
   eventBtnText: { fontSize: 13 },
 
-  albumsWrap: { paddingTop: 14 },
+  albumsWrap: { paddingTop: 14, paddingHorizontal: 14 },
+  albumGrid: { flexDirection: "row", flexWrap: "wrap", gap: 3 },
+  albumCell: { width: "32.5%", aspectRatio: 1, borderRadius: 4, overflow: "hidden" },
+  albumImg: { width: "100%", height: "100%" },
+  albumOverlay: {
+    position: "absolute", bottom: 0, left: 0, right: 0,
+    backgroundColor: "rgba(0,0,0,0.5)", paddingHorizontal: 6, paddingVertical: 4,
+  },
+  albumName: { color: "#fff", fontSize: 10 },
 
   empty: { alignItems: "center", paddingTop: 50, paddingBottom: 30, gap: 10 },
   emptyTitle: { fontSize: 17 },
