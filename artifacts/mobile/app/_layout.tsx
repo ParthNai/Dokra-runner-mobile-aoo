@@ -32,6 +32,9 @@ function RootLayoutNav() {
       <Stack.Screen name="summary" options={{ animation: "slide_from_bottom" }} />
       <Stack.Screen name="history" options={{ animation: "slide_from_right" }} />
       <Stack.Screen name="activity-detail" options={{ animation: "slide_from_right" }} />
+      <Stack.Screen name="post-detail" options={{ animation: "slide_from_right" }} />
+      <Stack.Screen name="create-post" options={{ animation: "slide_from_bottom" }} />
+      <Stack.Screen name="event-detail" options={{ animation: "slide_from_right" }} />
     </Stack>
   );
 }
