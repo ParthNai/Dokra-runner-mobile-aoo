@@ -1,0 +1,152 @@
+Continue building the Flutter app DOKRA Running Club.
+
+Use the uploaded image as the UI reference for:
+
+City Leaderboard Screen
+State Leaderboard Screen
+India Leaderboard Screen
+Leaderboard Overview Screen
+
+Maintain DOKRA branding:
+
+Black background
+Red primary color
+Gold accent color
+Premium cards
+Smooth animations
+Nike Run Club + Strava inspired design
+LEADERBOARD MODULE
+
+Create three ranking systems:
+
+City Ranking
+State Ranking
+India Ranking
+
+Ranking should be based on:
+
+Total Distance Completed (KM)
+CITY LEADERBOARD
+
+Show only users from the same city.
+
+Example:
+
+Ahmedabad Users → Ahmedabad Leaderboard
+
+Display:
+
+Rank Number
+Profile Photo
+User Name
+Total KM
+Badge (Top 3)
+
+Highlight current user.
+
+STATE LEADERBOARD
+
+Show users from the same state.
+
+Example:
+
+Gujarat Leaderboard
+
+Display:
+
+Rank
+Profile Photo
+Name
+Total Distance
+
+Highlight current user.
+
+INDIA LEADERBOARD
+
+Display all users from India.
+
+Show:
+
+Top 3 podium section
+Remaining ranking list
+Current user position
+LEADERBOARD OVERVIEW SCREEN
+
+Show:
+
+Your Current Ranking
+City Rank
+State Rank
+India Rank
+Leaderboard Shortcuts
+City Leaderboard
+State Leaderboard
+India Leaderboard
+Motivation Banner
+
+Examples:
+
+"Compete. Improve. Inspire."
+
+FILTER OPTIONS
+
+Provide:
+
+This Week
+This Month
+This Year
+All Time
+
+Rankings should update automatically.
+
+BADGES
+
+Top 3 users receive:
+
+🥇 Gold Badge
+
+🥈 Silver Badge
+
+🥉 Bronze Badge
+
+FIRESTORE COLLECTION
+
+Create:
+
+leaderboards
+
+Example structure:
+
+{
+  "userId": "",
+  "name": "",
+  "profilePhoto": "",
+  "state": "",
+  "city": "",
+  "totalDistance": 0,
+  "totalActivities": 0,
+  "cityRank": 0,
+  "stateRank": 0,
+  "indiaRank": 0
+}
+AUTO UPDATE
+
+Whenever an activity is completed:
+
+Update user's total distance.
+Recalculate rankings.
+Refresh all leaderboards automatically.
+REQUIREMENTS
+
+Use:
+
+Provider State Management
+StreamBuilder for real-time updates
+Firebase Firestore
+Clean Architecture
+Null Safety
+Reusable Widgets
+Responsive UI
+Production-Level Code
+
+The leaderboard should feel like a premium competitive running experience under the DOKRA Running Club brand.

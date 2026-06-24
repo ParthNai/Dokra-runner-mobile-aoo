@@ -1,0 +1,212 @@
+Continue building the Flutter app DOKRA Running Club.
+
+Use the uploaded image as the UI reference for:
+
+Community Feed Screen
+Post Detail Screen
+Create Post Screen
+Event Details Screen
+
+Maintain the same premium branding:
+
+Black background
+Red primary color
+Gold accent color
+Rounded cards
+Smooth animations
+Nike Run Club + Strava inspired UI
+COMMUNITY FEED
+
+Users should only see content from their own city club.
+
+Example:
+
+User Club:
+
+DOKRA Ahmedabad Running Club
+
+Only show Ahmedabad club content.
+
+Display:
+
+Club Header
+Club Name
+State
+Member Count
+
+Tabs:
+
+Feed
+Members
+Events
+Albums
+Create Post Box
+
+"What's on your mind?"
+
+Allow:
+
+Text post
+Image upload
+Activity sharing
+
+Floating Action Button:
+
+Create New Post
+
+Feed Cards
+
+Each post should contain:
+
+User Profile Photo
+User Name
+Club Name
+Time Posted
+Caption
+Images (optional)
+Like Count
+Comment Count
+Share Button
+
+Save posts to Firestore.
+
+POST DETAIL SCREEN
+
+When a post is clicked:
+
+Display:
+
+Full Post
+User profile
+Caption
+Images
+Activity information (optional)
+Likes Section
+
+Show users who liked the post.
+
+Comments Section
+
+Display:
+
+Profile photo
+Name
+Comment
+Time
+
+Allow adding comments.
+
+Update Firestore in real time.
+
+CREATE POST SCREEN
+
+Allow:
+
+Text Post
+Upload Images
+
+Use image_picker.
+
+Optional:
+
+Attach activity:
+
+Walking
+Running
+Cycling
+
+Optional:
+
+Add location.
+
+Visibility options:
+
+Public Club
+Members Only
+
+POST button should upload data to Firestore and return to Community Feed.
+
+EVENT DETAILS SCREEN
+
+Display:
+
+Event Banner
+
+Example:
+
+DOKRA Sunrise Run Ahmedabad
+
+Show:
+
+Event Date
+Event Time
+Event Location
+Days Remaining
+Participants Count
+About Event
+
+Description
+
+Event Highlights
+
+Example:
+
+5K Run
+Medal for Finishers
+Hydration Support
+Group Photos
+
+Buttons:
+
+I'M GOING
+INTERESTED
+
+Save attendance status in Firestore.
+
+FIRESTORE COLLECTIONS
+
+Create:
+
+posts
+comments
+likes
+events
+event_participants
+club_members
+albums
+REAL-TIME FEATURES
+
+Use StreamBuilder for:
+
+Posts
+Likes
+Comments
+Events
+IMAGE STORAGE
+
+Store uploaded images in:
+
+Firebase Storage
+
+Save image URLs inside Firestore.
+
+COMMUNITY RULE
+
+Users can only interact inside their own city club.
+
+Example:
+
+Ahmedabad users → Ahmedabad posts only.
+
+Surat users → Surat posts only.
+
+REQUIREMENTS
+Provider State Management
+Clean Architecture
+Null Safety
+Responsive UI
+Reusable Widgets
+Production Level Code
+Smooth Animations
+
+The community experience should feel like a premium Indian running club social network under the DOKRA Running Club brand.

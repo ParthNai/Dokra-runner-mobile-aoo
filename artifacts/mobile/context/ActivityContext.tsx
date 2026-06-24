@@ -21,7 +21,11 @@ export interface Activity {
   distance: number;
   duration: number;
   avgSpeed: number;
+  maxSpeed: number;
   calories: number;
+  steps: number;
+  avgHeartRate: number;
+  elevationGain: number;
   date: string;
   route: RoutePoint[];
   clubName: string;
@@ -32,22 +36,23 @@ export interface Activity {
 interface ActivityContextType {
   activities: Activity[];
   addActivity: (activity: Omit<Activity, "id">) => Promise<Activity>;
+  deleteActivity: (id: string) => Promise<void>;
   getActivitiesByUser: (userId: string) => Activity[];
   getAllActivities: () => Activity[];
   getTodayStats: (userId: string) => { steps: number; distance: number; calories: number; activeTime: number };
+  getWeeklyData: (userId: string) => { day: string; distance: number }[];
 }
 
 const ActivityContext = createContext<ActivityContextType | undefined>(undefined);
 const ACTIVITIES_KEY = "dokra_activities";
-
 const STEPS_PER_KM = 1312;
+
+const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export function ActivityProvider({ children }: { children: React.ReactNode }) {
   const [activities, setActivities] = useState<Activity[]>([]);
 
-  useEffect(() => {
-    loadActivities();
-  }, []);
+  useEffect(() => { loadActivities(); }, []);
 
   const loadActivities = async () => {
     try {
@@ -67,6 +72,12 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
     setActivities(updated);
     await AsyncStorage.setItem(ACTIVITIES_KEY, JSON.stringify(updated));
     return newActivity;
+  }, [activities]);
+
+  const deleteActivity = useCallback(async (id: string) => {
+    const updated = activities.filter((a) => a.id !== id);
+    setActivities(updated);
+    await AsyncStorage.setItem(ACTIVITIES_KEY, JSON.stringify(updated));
   }, [activities]);
 
   const getActivitiesByUser = useCallback(
@@ -91,9 +102,30 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
     [activities]
   );
 
+  const getWeeklyData = useCallback(
+    (userId: string) => {
+      const now = new Date();
+      const dayOfWeek = now.getDay();
+      const monday = new Date(now);
+      monday.setDate(now.getDate() - ((dayOfWeek + 6) % 7));
+      monday.setHours(0, 0, 0, 0);
+
+      return DAY_LABELS.map((day, i) => {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const dStr = d.toDateString();
+        const dist = activities
+          .filter((a) => a.userId === userId && new Date(a.date).toDateString() === dStr)
+          .reduce((sum, a) => sum + a.distance, 0);
+        return { day, distance: dist };
+      });
+    },
+    [activities]
+  );
+
   return (
     <ActivityContext.Provider
-      value={{ activities, addActivity, getActivitiesByUser, getAllActivities, getTodayStats }}
+      value={{ activities, addActivity, deleteActivity, getActivitiesByUser, getAllActivities, getTodayStats, getWeeklyData }}
     >
       {children}
     </ActivityContext.Provider>

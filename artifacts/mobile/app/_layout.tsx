@@ -30,6 +30,8 @@ function RootLayoutNav() {
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="run" options={{ animation: "slide_from_bottom" }} />
       <Stack.Screen name="summary" options={{ animation: "slide_from_bottom" }} />
+      <Stack.Screen name="history" options={{ animation: "slide_from_right" }} />
+      <Stack.Screen name="activity-detail" options={{ animation: "slide_from_right" }} />
     </Stack>
   );
 }
