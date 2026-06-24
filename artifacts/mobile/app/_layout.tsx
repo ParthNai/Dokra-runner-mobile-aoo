@@ -17,6 +17,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AuthProvider } from "@/context/AuthContext";
 import { ActivityProvider } from "@/context/ActivityContext";
 import { CommunityProvider } from "@/context/CommunityContext";
+import { WearableProvider } from "@/context/WearableContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -41,6 +42,7 @@ function RootLayoutNav() {
       <Stack.Screen name="achievements" options={{ animation: "slide_from_right" }} />
       <Stack.Screen name="settings" options={{ animation: "slide_from_right" }} />
       <Stack.Screen name="help-support" options={{ animation: "slide_from_right" }} />
+      <Stack.Screen name="wearable" options={{ animation: "slide_from_right" }} />
     </Stack>
   );
 }
@@ -70,7 +72,9 @@ export default function RootLayout() {
               <AuthProvider>
                 <ActivityProvider>
                   <CommunityProvider>
-                    <RootLayoutNav />
+                    <WearableProvider>
+                      <RootLayoutNav />
+                    </WearableProvider>
                   </CommunityProvider>
                 </ActivityProvider>
               </AuthProvider>

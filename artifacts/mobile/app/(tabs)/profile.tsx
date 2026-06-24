@@ -21,6 +21,7 @@ const MENU_ITEMS = [
   { id: "edit", icon: "person-outline", label: "Edit Profile", route: "/edit-profile" },
   { id: "achievements", icon: "trophy-outline", label: "Achievements", route: "/achievements" },
   { id: "activities", icon: "walk-outline", label: "My Activities", route: "/history" },
+  { id: "wearable", icon: "watch-outline", label: "Connected Devices", route: "/wearable" },
   { id: "settings", icon: "settings-outline", label: "Settings", route: "/settings" },
   { id: "support", icon: "help-circle-outline", label: "Help & Support", route: "/help-support" },
 ];
