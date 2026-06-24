@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "DOKRA Running Club"
+version = "1.0.0"
+id = "artifacts/dokra-running-club"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19911
+
+[services.development]
+run = "pnpm --filter @workspace/dokra-running-club run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/dokra-running-club", "run", "build" ]
+publicDir = "artifacts/dokra-running-club/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19911"
+BASE_PATH = "/"

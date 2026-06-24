@@ -1,0 +1,125 @@
+Build a new feature called **Activity Share Card Generator** inside the Flutter app DOKRA Running Club.
+
+After a user finishes any activity (Walking, Running, Cycling), automatically generate a premium social media poster similar to Nike Run Club and Strava.
+
+Use the uploaded reference image as inspiration only.
+
+## Activity Share Card Requirements
+
+Generate a vertical 9:16 card suitable for:
+
+* Instagram Story
+* WhatsApp Status
+* Facebook Story
+* Share Image Download
+
+### Show the following information:
+
+#### Header
+
+* DOKRA Running Club Logo
+* Activity Type (Morning Run, Evening Walk, Cycling, etc.)
+* Motivational text:
+  "Run • Achieve • Inspire"
+
+#### Location & Weather
+
+* City, State
+* Date and Time
+* Temperature
+* Weather Condition
+
+#### User Section
+
+* User profile photo
+* User name
+
+#### Performance Statistics
+
+* Distance (KM)
+* Duration
+* Average Pace
+* Average Speed
+* Calories Burned
+* Total Steps
+
+#### Route Visualization
+
+Display the completed GPS route using route points collected during the activity.
+
+Show:
+
+* Start Marker
+* Finish Marker
+* KM markers (1 KM, 2 KM, 3 KM...)
+
+#### Branding
+
+Display:
+
+DOKRA RUNNING CLUB
+
+and hashtag:
+
+#DokraRunningClub
+
+#### Footer Buttons
+
+* Save Image
+* Share Image
+
+## Sharing Support
+
+Allow sharing directly to:
+
+* Instagram
+* WhatsApp
+* Facebook
+* Other apps
+
+Use:
+
+share_plus
+
+## Image Generation
+
+Generate the card using:
+
+* screenshot package
+* widget_to_image
+* custom painter
+
+Save the final image to device storage.
+
+## File Naming
+
+Example:
+
+dokra_run_2026_06_24.png
+
+## Firestore
+
+Save image URL inside activity document.
+
+Example:
+
+{
+"activityType": "Running",
+"distance": 8.53,
+"duration": "01:06:29",
+"steps": 10698,
+"calories": 568,
+"shareImageUrl": ""
+}
+
+## Requirements
+
+* Premium dark theme
+* Black background
+* Red primary color
+* Gold accent color
+* Smooth animations
+* Production-level code
+* Responsive design
+
+The result should feel like Nike Run Club + Strava but with DOKRA Running Club branding.

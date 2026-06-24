@@ -1,0 +1,160 @@
+Continue building the Flutter app DOKRA Running Club.
+
+Use the uploaded image as the UI reference for:
+
+Profile Screen
+Edit Profile Screen
+Change Profile Photo Screen
+Profile Update Success Screen
+
+Maintain DOKRA branding:
+
+Black background
+Red primary color
+Gold accent color
+Premium cards
+Smooth animations
+Modern sports app design inspired by Nike Run Club and Strava
+PROFILE SCREEN
+
+Display:
+
+Profile Photo
+Full Name
+State
+City
+Club Name
+
+Example:
+
+Ahmedabad, Gujarat
+
+DOKRA Ahmedabad Running Club
+
+User Statistics
+
+Show:
+
+Total Distance (KM)
+Total Activities
+Total Steps
+Menu Items
+
+Create:
+
+Edit Profile
+Achievements
+My Activities
+Settings
+Help & Support
+Logout
+EDIT PROFILE SCREEN
+
+Allow users to update:
+
+Full Name
+Mobile Number
+Date of Birth
+Gender
+State
+City
+
+Club Name should update automatically according to city.
+
+Example:
+
+Ahmedabad → DOKRA Ahmedabad Running Club
+
+Surat → DOKRA Surat Running Club
+
+Email should remain read-only.
+
+Button:
+
+SAVE CHANGES
+
+Update Firestore after successful save.
+
+CHANGE PROFILE PHOTO
+
+Use image_picker package.
+
+Allow:
+
+Take Photo
+Choose From Gallery
+Remove Photo
+
+Upload images to Firebase Storage.
+
+Save image URL in Firestore.
+
+UPDATE SUCCESS SCREEN
+
+After profile update:
+
+Show:
+
+✅ Profile Updated Successfully
+
+Display:
+
+Profile Photo
+Name
+City
+Club Name
+
+Show latest statistics:
+
+Total Distance
+Total Activities
+Total Steps
+
+Buttons:
+
+VIEW PROFILE
+BACK TO HOME
+FIRESTORE COLLECTION
+
+users
+
+Example:
+
+{
+  "fullName": "",
+  "email": "",
+  "mobileNumber": "",
+  "dateOfBirth": "",
+  "gender": "",
+  "state": "",
+  "city": "",
+  "clubName": "",
+  "profilePhoto": "",
+  "totalDistance": 0,
+  "totalActivities": 0,
+  "totalSteps": 0
+}
+LOGOUT FUNCTION
+
+When user presses Logout:
+
+Show confirmation dialog.
+Sign out from Firebase Authentication.
+Sign out from Google Sign-In if applicable.
+Clear local session.
+Navigate back to Login Screen.
+REQUIREMENTS
+
+Use:
+
+Firebase Authentication
+Cloud Firestore
+Firebase Storage
+image_picker
+Provider State Management
+Null Safety
+Clean Architecture
+Reusable Widgets
+Production Level Code
+
+The profile experience should feel premium and polished under the DOKRA Running Club brand.
