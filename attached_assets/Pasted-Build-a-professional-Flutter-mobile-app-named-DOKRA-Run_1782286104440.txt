@@ -1,0 +1,215 @@
+Build a professional Flutter mobile app named DOKRA Running Club inspired by Nike Run Club and Strava.
+
+Use the uploaded onboarding design image as the UI reference for:
+
+Splash Screen
+Welcome Screen
+Login Screen
+Register Screen
+
+Follow the same premium dark theme with:
+
+Black background
+Red accents
+Gold highlights
+Modern rounded cards
+Smooth animations
+Professional typography
+Authentication Requirements
+
+Implement Firebase Authentication with:
+
+Email & Password Login
+User must register first.
+Store user data securely.
+During login, allow access only if email and password are correct.
+Wrong email or wrong password must show proper error messages.
+No fake login.
+Maintain session after successful login.
+Google Sign-In
+Add Google Authentication.
+After Google login, create user profile automatically.
+Store profile data in Firestore.
+Forgot Password
+Send password reset email.
+Security
+Validate email format.
+Password minimum 8 characters.
+Secure authentication flow.
+Prevent empty fields.
+Show loading indicators.
+Registration Flow
+
+After signup:
+
+Step 1
+
+Full Name
+
+Step 2
+
+Email
+
+Step 3
+
+Mobile Number
+
+Step 4
+
+Password
+
+Step 5
+
+Gender
+
+Step 6
+
+Date of Birth
+
+Step 7
+
+Select State (India)
+
+Step 8
+
+After selecting state, load cities of that state.
+
+Step 9
+
+User selects city.
+
+Step 10
+
+Automatically show DOKRA Club of that city.
+
+Example:
+
+Gujarat → Ahmedabad → DOKRA Ahmedabad Running Club
+
+Maharashtra → Pune → DOKRA Pune Running Club
+
+Step 11
+
+Profile Photo
+
+Step 12
+
+Complete Registration
+
+Save all data to Firebase Firestore.
+
+Main App Structure
+
+Bottom Navigation:
+
+Home
+Activities
+Community
+Leaderboard
+Profile
+Activities Supported
+
+Only:
+
+Walking
+Running
+Cycling
+Home Screen
+
+Show:
+
+Today's Steps
+Distance
+Calories
+Active Time
+Start Activity Button
+GPS Tracking
+
+Use:
+
+google_maps_flutter
+geolocator
+flutter_polyline_points
+
+Requirements:
+
+Real-time GPS tracking
+Live route drawing
+Distance calculation
+Speed calculation
+Duration timer
+Accurate kilometer measurement
+Pause / Resume / Finish
+Activity Summary
+
+After finish show:
+
+Map
+Distance
+Average Speed
+Calories
+Duration
+Date
+
+Save activity history in Firestore.
+
+Community Module
+
+Users from same city club can:
+
+Create posts
+Upload photos
+Like posts
+Comment
+View club members
+Leaderboards
+
+Create:
+
+City Leaderboard
+State Leaderboard
+India Leaderboard
+Profile
+
+Show:
+
+Name
+Profile photo
+State
+City
+Club Name
+Total Distance
+Total Activities
+Achievements
+Packages
+
+Use:
+
+firebase_core
+firebase_auth
+cloud_firestore
+firebase_storage
+google_sign_in
+google_maps_flutter
+geolocator
+flutter_polyline_points
+provider
+shared_preferences
+image_picker
+cached_network_image
+flutter_svg
+Folder Structure
+lib/
+core/
+models/
+services/
+providers/
+screens/
+widgets/
+routes/
+utils/
+main.dart
+
+Use clean architecture, responsive UI, null safety, reusable widgets, proper error handling, and production-level code.
+
+The app should feel like a premium Indian fitness community app and be ready for future Play Store release.
