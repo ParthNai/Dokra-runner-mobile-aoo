@@ -124,7 +124,22 @@ export default function SummaryScreen() {
         <Text style={[styles.headerTitle, { color: "#fff", fontFamily: "Inter_700Bold" }]}>
           Activity Summary
         </Text>
-        <Pressable style={styles.shareBtn}>
+        <Pressable style={styles.shareBtn} onPress={() => router.push({
+          pathname: "/share-card",
+          params: {
+            id: actId,
+            distance: params.distance,
+            duration: params.duration,
+            avgSpeed: params.avgSpeed,
+            calories: params.calories,
+            steps: params.steps,
+            pace: params.pace,
+            type: actType,
+            date: activity?.date ?? new Date().toISOString(),
+            city: activity?.city ?? "Ahmedabad",
+            state: activity?.state ?? "Gujarat",
+          }
+        })}>
           <Ionicons name="share-outline" size={22} color="#fff" />
         </Pressable>
       </View>

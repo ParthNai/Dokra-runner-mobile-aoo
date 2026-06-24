@@ -37,6 +37,7 @@ function RootLayoutNav() {
       <Stack.Screen name="event-detail" options={{ animation: "slide_from_right" }} />
       <Stack.Screen name="edit-profile" options={{ animation: "slide_from_right" }} />
       <Stack.Screen name="profile-success" options={{ animation: "fade" }} />
+      <Stack.Screen name="share-card" options={{ animation: "slide_from_bottom", headerShown: false }} />
     </Stack>
   );
 }
